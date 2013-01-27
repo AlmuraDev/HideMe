@@ -8,4 +8,3 @@ website: ${project.organization.url}
 main: ${mainClass}
 load: postworld
 platform: Server
-depends: [Vanilla]
