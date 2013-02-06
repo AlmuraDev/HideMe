@@ -40,7 +40,7 @@ import org.spout.api.map.DefaultedKeyImpl;
 import org.spout.api.plugin.CommonPlugin;
 import org.spout.api.plugin.PluginLogger;
 
-public class HideMePlugin extends CommonPlugin implements Listener {
+public class HideMePlugin extends CommonPlugin {
 	public static final DefaultedKey<Boolean> IS_VISIBLE = new DefaultedKeyImpl<Boolean>("hideme_is_visible", true);
 	private HideMeConfiguration config;
 
@@ -49,9 +49,8 @@ public class HideMePlugin extends CommonPlugin implements Listener {
 		if (Spout.getEngine() instanceof Server) {
 			final CommandRegistrationsFactory<Class<?>> commandRegFactory = new AnnotatedCommandRegistrationFactory(new SimpleInjector(this), new SimpleAnnotatedCommandExecutorFactory());
 			getEngine().getRootCommand().addSubCommands(this, HideMeCommands.class, commandRegFactory);
-			getEngine().getEventManager().registerEvents(this, this);
+			getEngine().getEventManager().registerEvents(new HideMeListener(this), this);
 		}
-		getEngine().getEventManager().registerEvents(new HideMeListener(this), this);
 		getLogger().info(getDescription().getVersion() + " enabled.");
 	}
 
