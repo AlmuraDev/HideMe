@@ -26,6 +26,7 @@
  */
 package com.almuradev.hideme;
 
+import org.spout.api.Engine;
 import org.spout.api.Server;
 import org.spout.api.Spout;
 import org.spout.api.command.CommandContext;
@@ -39,6 +40,10 @@ public class HideMeCommands {
 
 	public HideMeCommands(HideMePlugin plugin) {
 		this.plugin = plugin;
+	}
+
+	private Engine getEngine() {
+		return plugin.getEngine();
 	}
 
 	@Command(aliases = {"hide"}, usage = "<player>", desc = "Allows either yourself or another player to be hidden.", min = 0, max = 1)
@@ -57,7 +62,7 @@ public class HideMeCommands {
 				player.sendMessage(plugin.getPrefix(), "You are now hidden.");
 			}
 		} else if (args.length() == 1 && source.hasPermission("hideme.hide.other")) {
-			Player target = args.getPlayer(0, true);
+			Player target = getEngine().getPlayer(args.getString(0), true);
 
 			if (target == null) {
 				source.sendMessage(plugin.getPrefix(), "The player '", args.getString(0), "' does not exist or is offline.");
@@ -113,7 +118,7 @@ public class HideMeCommands {
 				}
 			}
 		} else if (args.length() == 1 && source.hasPermission("hideme.show.other")) {
-			Player target = args.getPlayer(0, true);
+			Player target = getEngine().getPlayer(args.getString(0), true);
 
 			if (target == null) {
 				source.sendMessage(plugin.getPrefix(), "The player '", args.getString(0), "' does not exist or is offline.");

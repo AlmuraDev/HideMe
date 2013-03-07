@@ -6,7 +6,7 @@
 	<name>HideMe</name>
 	<groupId>com.almuradev</groupId>
 	<artifactId>hideme</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<url>http://www.almuradev.com</url>
 	<description>A simple vanishing plugin that allows the player to make himself invisible, designed for the Spout platform.</description>
 
@@ -16,7 +16,7 @@
 		<mainClass>com.almuradev.hideme.HideMePlugin</mainClass>
 		<spoutVersion>dev-SNAPSHOT</spoutVersion>
 		<vanillaVersion>1.4.7-SNAPSHOT</vanillaVersion>
-		<buildNumber>1.0.1-SNAPSHOT</buildNumber>
+		<buildNumber>1.0.2</buildNumber>
 	</properties>
 
 	<!-- Company information -->
@@ -54,12 +54,6 @@
 			<groupId>org.spout</groupId>
 			<artifactId>spoutapi</artifactId>
 			<version>${spoutVersion}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.spout</groupId>
-			<artifactId>vanilla</artifactId>
-			<version>${vanillaVersion}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

@@ -45,11 +45,6 @@ public class HideMePlugin extends CommonPlugin {
 
 	@Override
 	public void onEnable() {
-		if (Spout.getEngine() instanceof Server) {
-			final CommandRegistrationsFactory<Class<?>> commandRegFactory = new AnnotatedCommandRegistrationFactory(new SimpleInjector(this), new SimpleAnnotatedCommandExecutorFactory());
-			getEngine().getRootCommand().addSubCommands(this, HideMeCommands.class, commandRegFactory);
-			getEngine().getEventManager().registerEvents(new HideMeListener(this), this);
-		}
 		getLogger().info(getDescription().getVersion() + " enabled.");
 	}
 
@@ -60,6 +55,11 @@ public class HideMePlugin extends CommonPlugin {
 
 	@Override
 	public void onLoad() {
+		if (Spout.getEngine() instanceof Server) {
+			final CommandRegistrationsFactory<Class<?>> commandRegFactory = new AnnotatedCommandRegistrationFactory(getEngine(), new SimpleInjector(this), new SimpleAnnotatedCommandExecutorFactory());
+			getEngine().getRootCommand().addSubCommands(this, HideMeCommands.class, commandRegFactory);
+			getEngine().getEventManager().registerEvents(new HideMeListener(this), this);
+		}
 		((PluginLogger) getLogger()).setTag(new ChatArguments("[", ChatStyle.DARK_GREEN, "HideMe", ChatStyle.RESET, "] "));
 		config = new HideMeConfiguration(getDataFolder());
 		config.load();
